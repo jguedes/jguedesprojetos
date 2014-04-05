@@ -1,5 +1,6 @@
 drop database if exists bd1;
 create database if not exists bd1;
+use bd1;
 create table usuario(
 id BIGINT auto_increment primary key,
 nome varchar(150) not null unique,
@@ -35,5 +36,6 @@ objetivosalcancados MEDIUMTEXT null,
 hipotesesvalidadas MEDIUMTEXT null,
 conclusaogeral MEDIUMTEXT null,
 referenciasbibliograficas MEDIUMTEXT null,
-forei
+foreign key(id_usr_autor) references usuario(id),
+foreign key(id_usr_orientador) references usuario(id)
 );
