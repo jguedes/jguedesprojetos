@@ -1,15 +1,14 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: Moccasin
+	background-color: Moccasin;
+	padding-right: 8px;
 }
 
 .cabecalho {
-	/*border-color:blue;
-	border-style:solid;*/
-	float: left;
 	height: 100px;
 	width: 100%;
+	float: left;
 }
 
 .slogan {
@@ -17,7 +16,7 @@ body {
 	width: 70%;
 }
 
-h1,h2 {
+h1,h2,h3,ul {
 	color: maroon;
 }
 
@@ -39,15 +38,50 @@ h1,h2 {
 }
 
 .barraDeMenu {
+	background-color: Peru;
 	float: left;
-	width: 100%;
-	text-align: center;	
+	text-align: center;
+	width: 99.3%;
+	height: 25px;
+	padding-bottom: 20px;
 }
 
-.barraDeMenu ul{
+ul {
 	list-style-type: none;
 }
 
-.barraDeMenu ul li{
+.barraDeMenu ul li {
 	display: inline;
+}
+
+.menuEsquerdo,.menuDireito,.recomendacao,.barraDeMenu {
+	border-style: solid;
+	border-color: transparent;
+}
+
+.menuEsquerdo {
+	width: 15%;
+	float: left;
+}
+
+.menuDireito {
+	width: 0%;
+	float: left;
+}
+
+.recomendacao {
+	float: left;
+	height: 400px;
+	width: 84%;
+}
+
+.recomendacao .msgRecomendacao {
+	float: left;
+	width: 40%;
+}
+
+.recomendacao img {
+	float: rigth;
+	width: 60%;
+	height: 100%;
 }
