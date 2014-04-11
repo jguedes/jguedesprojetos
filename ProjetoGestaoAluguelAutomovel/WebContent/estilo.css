@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: Moccasin
+}
+
+.cabecalho {
+	/*border-color:blue;
+	border-style:solid;*/
+	float: left;
+	height: 100px;
+	width: 100%;
+}
+
+.slogan {
+	float: left;
+	width: 70%;
+}
+
+h1,h2 {
+	color: maroon;
+}
+
+.usuario {
+	float: left;
+	text-align: right;
+	width: 30%;
+}
+
+.usuario h2 {
+	text-align: right;
+	width: 100%;
+}
+
+.linha {
+	float: left;
+	height: 5px;
+	width: 100%;
+}
+
+.barraDeMenu {
+	float: left;
+	width: 100%;
+	text-align: center;	
+}
+
+.barraDeMenu ul{
+	list-style-type: none;
+}
+
+.barraDeMenu ul li{
+	display: inline;
+}
