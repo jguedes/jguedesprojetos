@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: Snow;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.entradas,.latEsquerdo,.latDireito {
+	float: left;
+}
+
+.entradas,.latEsquerdo,.latDireito {
+	border-style: solid;
+}
+
+.entradas {
+	width: 60%;
+}
+
+.latEsquerdo,.latDireito {
+	width: 15%;
+}
+
+.entradas table{
+	width: 100%;
+}
+
+.inputTxtResumo{
+	width: 80%;
+}
