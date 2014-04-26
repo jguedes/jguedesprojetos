@@ -5,18 +5,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="./estilo.css">
+<script src="./script.js" type="text/javascript"></script>
 <title>Criação de Trabalhos Acadêmicos</title>
 </head>
-<body>
-<div class="latEsquerdo"></div>
+<body onload="iniciar()">
+	<%!String elemento;
+
+	public String mudarElemento(String titulo) {
+		elemento = titulo;
+		System.out.print("Realizando mudarElemento!");
+		return elemento;
+	}%>
+	<%
+		mudarElemento("RESUMO");
+	%>
+	<div class="latEsquerdo" id="latEsquerdo">
+		<input type="button" onclick='alert(<%=mudarElemento("Abstract")%>)'
+			value="Abstract">
+	</div>
 	<div class="entradas">
 		<table border="1">
 			<tr>
-				<td>Resumo</td>
-				<td><form  class="inputTxtResumo" action=""><textarea cols="100" rows="25"></textarea></form></td>
+				<td><%=elemento%></td>
+				<td><form class="inputTxtResumo" action="">
+						<textarea cols="50" rows="25"></textarea>
+					</form></td>
 			</tr>
 		</table>
 	</div>
-<div class="latDireito"></div>
+	<div class="latDireito"></div>
 </body>
 </html>
