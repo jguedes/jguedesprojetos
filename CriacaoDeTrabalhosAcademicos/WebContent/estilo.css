@@ -11,7 +11,7 @@ body {
 }
 
 .entradas,.latEsquerdo,.latDireito {
-	border-style: solid;
+	border-style: none;
 }
 
 .entradas {
@@ -20,12 +20,18 @@ body {
 
 .latEsquerdo,.latDireito {
 	width: 15%;
+	height: 640px;
 }
 
 .entradas table{
 	width: 100%;
 }
 
-.inputTxtResumo{
-	width: 80%;
+.inputTxtResumo {
+	width: 650px;
+}
+
+.inputTxtResumo textarea{
+	max-width: 99%;
+	min-width: 99%;
 }
