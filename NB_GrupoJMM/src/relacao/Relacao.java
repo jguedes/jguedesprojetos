@@ -1,12 +1,10 @@
 package relacao;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import calculo.Calculo;
-import analisadordearquivo.AnalisadorDeArquivo;
 
 public class Relacao {
 
@@ -32,26 +30,17 @@ public class Relacao {
 	 */
 	private List<Instacia> instancias;
 
-	public Relacao(File arquivo) {
-		this();
-
-		if (arquivo == null)
-			return;
-
-		analisarArquivo(arquivo);
-
+	public Relacao() {
+		this(null);
 	}
 
-	public Relacao() {
+	public Relacao(String nome) {
 
+		this.nome = nome;
 		classes = new ArrayList<Classe>();
 		atributos = new HashMap<Long, Atributo>();
 		instancias = new ArrayList<Instacia>();
 
-	}
-
-	private void analisarArquivo(File arquivo) {
-		new AnalisadorDeArquivo(arquivo, this);
 	}
 
 	public void setNome(String nome) {

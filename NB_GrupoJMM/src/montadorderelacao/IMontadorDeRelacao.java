@@ -1,12 +1,8 @@
 package montadorderelacao;
 
 import relacao.Relacao;
-import analisadordearquivo.IAnalisadorDeArquivo;
 
 public interface IMontadorDeRelacao {
-
-	public void setAnalizadorDeFonteDeDados(
-			IAnalisadorDeArquivo analisadorDeFonteDeDados);
 
 	public Relacao getRelacao();
 
