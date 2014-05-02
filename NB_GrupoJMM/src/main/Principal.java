@@ -1,7 +1,11 @@
-package geral;
+package main;
 
 import java.io.File;
 
+import montadorderelacao.IMontadorDeRelacao;
+import montadorderelacao.MontadorDeRelacao;
+import analisadordearquivo.AnalisadorDeArquivo;
+import analisadordearquivo.IAnalisadorDeArquivo;
 import analisederelacao.AnaliseDeRelacao;
 import relacao.Relacao;
 
@@ -15,14 +19,18 @@ public class Principal {
 		//
 		// // string = "5.1,3.5,1.4,0.2,Iris-setosa\n";
 
-		Relacao relacao = new Relacao(new File("iris.arff"));
+		IMontadorDeRelacao montador = new MontadorDeRelacao();
+
+		IAnalisadorDeArquivo analisador = new AnalisadorDeArquivo(new File(
+				"iris.arff"), montador);
+
+		Relacao relacao = montador.getRelacao();
 
 		AnaliseDeRelacao analise = new AnaliseDeRelacao();
-		
+
 		analise.setRelacao(relacao);
 
 		System.out.println(analise.getProb_APrioriDeClasse(relacao.getClasses()
 				.get(0)));
 	}
-
 }

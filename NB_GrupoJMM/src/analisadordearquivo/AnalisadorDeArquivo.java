@@ -6,28 +6,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
 
-import relacao.Atributo;
-import relacao.Classe;
-import relacao.Instacia;
+import montadorderelacao.IMontadorDeRelacao;
 import relacao.Relacao;
 
 public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
 	private Reader arquivo;
-	private Relacao relacao;
 	private int posicaoDeAtributo;
 	private int linhaAtualDoArquivo;
 	private String textoDaLinha;
+	private IMontadorDeRelacao montadorDeRelacao;
 
-	public AnalisadorDeArquivo(File arquivo, Relacao relacao) {
+	public AnalisadorDeArquivo(File arquivo,
+			IMontadorDeRelacao montadorDeRelacao) {
 
 		try {
 
 			setArquivo(new FileReader(arquivo));
 
-			this.relacao = relacao;
+			setMontadorDeRelacao(montadorDeRelacao);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -37,35 +35,22 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 		if (arquivo != null) {
 
 			analisar();
-		}
 
-		System.out.println(relacao.toString());
+		}
 
 	}
 
 	@Override
 	public void setArquivo(Reader arquivo) {
+
 		this.arquivo = arquivo;
-	}
-
-	@Override
-	public List<Instacia> getlistaDeInstaciasDaRelacaoAnalisada() {
-
-		return relacao.getInstancias();
 
 	}
 
 	@Override
-	public List<Classe> getlistaDeClassesDaRelacaoAnalisada() {
+	public void setMontadorDeRelacao(IMontadorDeRelacao montadorDeRelacao) {
 
-		return relacao.getClasses();
-
-	}
-
-	@Override
-	public List<Atributo> getlistaDeAtributosDaRelacaoAnalisada() {
-
-		return relacao.getAtributos();
+		this.montadorDeRelacao = montadorDeRelacao;
 
 	}
 
@@ -89,19 +74,22 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
 					string = pegarNomeDaRelacao();
 
-					colocarNomeNaRelacao(string);
+					montadorDeRelacao.setNomeDaRelacao(string);
 
 				} else if (isLinhaDeNomedeAtributo()) {
 
 					string = pegarNomeDoAtributo();
 
-					criarAtributoNaRelacao(string);
+					montadorDeRelacao.criarAtributoNaRelacao(string,
+							posicaoDeAtributo);
+
+					posicaoDeAtributo++;
 
 				} else if (isLinhaDeNomesDeClasses()) {
 
 					arrayDeString = pegarNomesDasClasses();
 
-					criarClassesNaRelacao(arrayDeString);
+					montadorDeRelacao.criarClassesNaRelacao(arrayDeString);
 
 				} else {
 
@@ -109,7 +97,7 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
 					arrayDeString = pegarValoresDeAtributosDeInstancia();
 
-					criarInstaciaNaRelacao(arrayDeString);
+					montadorDeRelacao.criarInstaciaNaRelacao(arrayDeString);
 
 				}
 
@@ -118,7 +106,7 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 			// Ao fim da analise do arquivo deve-se atualizar os valores de
 			// distribuição das classes na relação.
 
-			relacao.calcularDistribuicaoDasClasses();
+			montadorDeRelacao.getRelacao().calcularDistribuicaoDasClasses();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -126,21 +114,14 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 		} finally {
 
 			try {
+
 				br.close();
+
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
+
 			}
-
-		}
-
-	}
-
-	private void criarClassesNaRelacao(String[] nomesDeClasse) {
-
-		for (String nome : nomesDeClasse) {
-
-			relacao.addClasse(new Classe(nome));
 
 		}
 
@@ -202,25 +183,6 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
 	}
 
-	private void criarAtributoNaRelacao(String nomeDeAtributo) {
-
-		// criar o atributo
-
-		Atributo atributo = new Atributo(nomeDeAtributo);
-
-		// Obs: nos arquivos .arff a ordem de posição dos atributos é
-		// estabelecida pela leitura de cima a baixo do arquivo.
-
-		// colocar o atribtuo na relação com sua posição.
-
-		relacao.addAtributo(posicaoDeAtributo, atributo);
-
-		// atualizar posicao para o próximo atributo
-
-		posicaoDeAtributo++;
-
-	}
-
 	private boolean isLinhaDeNomesDeClasses() {
 		return textoDaLinha.startsWith("@ATTRIBUTE")
 				&& (textoDaLinha.contains("'class'") || textoDaLinha
@@ -247,12 +209,6 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 		aux = aux.replace("'", "");
 
 		return aux.trim();
-
-	}
-
-	private void colocarNomeNaRelacao(String nomeDaRelacao) {
-
-		relacao.setNome(nomeDaRelacao);
 
 	}
 
@@ -285,19 +241,6 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
 	}
 
-	private void criarInstaciaNaRelacao(String valoresDosAtributosNaInstancia[]) {
-
-		if (!relacao.addInstancia(valoresDosAtributosNaInstancia)) {
-
-			System.out
-					.println("Erro ao criar instância com os dados da linha: "
-							+ linhaAtualDoArquivo + "\nDados da linha: "
-							+ textoDaLinha);
-
-		}
-
-	}
-
 	private String[] pegarValoresDeAtributosDeInstancia() {
 
 		// Nos arquivos .arff cada instância deve estar em uma linha e esta
@@ -308,20 +251,6 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 		String atributosDeInstancia[] = textoDaLinha.split(",");
 
 		return atributosDeInstancia;
-
-	}
-
-	@Override
-	public Relacao getRelacao() {
-
-		return relacao;
-
-	}
-
-	@Override
-	public String getNomeDaRelacaoAnalisada() {
-
-		return relacao.getNome();
 
 	}
 

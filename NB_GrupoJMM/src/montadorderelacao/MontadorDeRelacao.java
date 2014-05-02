@@ -3,18 +3,14 @@ package montadorderelacao;
 import relacao.Atributo;
 import relacao.Classe;
 import relacao.Relacao;
-import analisadordearquivo.IAnalisadorDeArquivo;
 
 public class MontadorDeRelacao implements IMontadorDeRelacao {
 
 	private Relacao relacao;
-	private IAnalisadorDeArquivo analisadorDeFonteDeDados;
 
-	@Override
-	public void setAnalizadorDeFonteDeDados(
-			IAnalisadorDeArquivo analisadorDeFonteDeDados) {
+	public MontadorDeRelacao() {
 
-		this.analisadorDeFonteDeDados = analisadorDeFonteDeDados;
+		relacao = new Relacao();
 
 	}
 
