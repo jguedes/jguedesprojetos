@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import calculo.Calculo;
-
 public class Relacao {
 
 	/**
@@ -28,7 +26,7 @@ public class Relacao {
 	/**
 	 * Conjunto de instâncias da relação.
 	 */
-	private List<Instacia> instancias;
+	private List<Instancia> instancias;
 
 	public Relacao() {
 		this(null);
@@ -39,7 +37,7 @@ public class Relacao {
 		this.nome = nome;
 		classes = new ArrayList<Classe>();
 		atributos = new HashMap<Long, Atributo>();
-		instancias = new ArrayList<Instacia>();
+		instancias = new ArrayList<Instancia>();
 
 	}
 
@@ -85,12 +83,9 @@ public class Relacao {
 
 		}
 
-		Instacia instancia = novaInstancia();
+		Instancia instancia = novaInstancia();
 
 		colocarOsValoresNaInstancia(instancia, valoresDosAtributos);
-
-		atualizarOcorrenciaDoValorDoAtributoClasse(instancia
-				.getValorDeAtributo("classe"));
 
 		instancias.add(instancia);
 
@@ -98,24 +93,7 @@ public class Relacao {
 
 	}
 
-	private void atualizarOcorrenciaDoValorDoAtributoClasse(
-			Object valorDeAtributo) {
-
-		for (Classe classe : classes) {
-
-			if (classe.getNome().equalsIgnoreCase(
-					String.valueOf(valorDeAtributo))) {
-
-				classe.addOcorrencia();
-
-				break;
-
-			}
-		}
-
-	}
-
-	private void colocarOsValoresNaInstancia(Instacia instancia,
+	private void colocarOsValoresNaInstancia(Instancia instancia,
 			String[] valoresDosAtributos) {
 
 		// calcular o index da última posição do array de string com os valores
@@ -146,7 +124,7 @@ public class Relacao {
 	 * 
 	 * @return
 	 */
-	private Instacia novaInstancia() {
+	private Instancia novaInstancia() {
 
 		int size = getQuantidadeDeAtributosDeInstacia();
 
@@ -167,7 +145,7 @@ public class Relacao {
 
 		// criar a instância
 
-		Instacia instanciaNova = new Instacia(nomesDosAtributosDeInstancia);
+		Instancia instanciaNova = new Instancia(nomesDosAtributosDeInstancia);
 
 		return instanciaNova;
 
@@ -204,7 +182,7 @@ public class Relacao {
 			s.append(" | ");
 		}
 		s.append(" }\nInstâncias:\n");
-		for (Instacia i : instancias) {
+		for (Instancia i : instancias) {
 			s.append(i.toString());
 			s.append("\n");
 		}
@@ -231,7 +209,7 @@ public class Relacao {
 
 	}
 
-	public List<Instacia> getInstancias() {
+	public List<Instancia> getInstancias() {
 
 		return instancias;
 
@@ -251,36 +229,22 @@ public class Relacao {
 
 	}
 
-	public void calcularDistribuicaoDasClasses() {
+	public Classe getClasseDeInstancia(Instancia instancia) {
 
-		long totalDeCasos = instancias.size();
-
-		long casosFavoraveis;
-
-		for (Classe classe : classes) {
-
-			casosFavoraveis = classe.getNumOcorrencias();
-
-			classe.setDistribuicao(Calculo.probabilidadeAPriori(
-					casosFavoraveis, totalDeCasos));
-
-		}
-
-	}
-
-	public double getDistribuicaoDeClasse(String nomeDaClasse) {
+		String nomeDaClasseNaInstancia = String.valueOf(instancia
+				.getValorDeAtributo("classe"));
 
 		for (Classe classe : classes) {
 
-			if (classe.getNome().equalsIgnoreCase(nomeDaClasse)) {
+			if (classe.getNome().equalsIgnoreCase(nomeDaClasseNaInstancia)) {
 
-				return classe.getDistribuicao();
+				return classe;
 
 			}
 
 		}
 
-		return 0;
+		return null;
 
 	}
 }
