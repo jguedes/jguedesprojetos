@@ -6,7 +6,7 @@ import montadorderelacao.IMontadorDeRelacao;
 import montadorderelacao.MontadorDeRelacao;
 import analisadordearquivo.AnalisadorDeArquivo;
 import analisadordearquivo.IAnalisadorDeArquivo;
-import analisederelacao.AnaliseDeRelacao;
+import analisenaivebayes.AnaliseNaiveBayes;
 import relacao.Relacao;
 
 public class Principal {
@@ -26,11 +26,11 @@ public class Principal {
 
 		Relacao relacao = montador.getRelacao();
 
-		AnaliseDeRelacao analise = new AnaliseDeRelacao();
+		AnaliseNaiveBayes analiseNB = new AnaliseNaiveBayes(relacao);
 
-		analise.setRelacao(relacao);
-
-		System.out.println(analise.getProb_APrioriDeClasse(relacao.getClasses()
-				.get(0)));
+		System.out.println(analiseNB.getProb_APrioriDeClasse(relacao
+				.getClasses().get(0)));
+		System.out.println(analiseNB.getProb_Condicional(relacao.getAtributos()
+				.get(0).getNome(), 5.1, "Iris-setosa"));
 	}
 }

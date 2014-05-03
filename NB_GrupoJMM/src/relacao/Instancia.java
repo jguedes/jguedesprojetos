@@ -2,7 +2,7 @@ package relacao;
 
 import java.util.HashMap;
 
-public class Instacia {
+public class Instancia {
 
 	/**
 	 * Conjunto dos atributos da instância.<br>
@@ -18,7 +18,7 @@ public class Instacia {
 	 * 
 	 * @param nomesDosAtributos
 	 */
-	public Instacia(String[] nomesDosAtributos) {
+	public Instancia(String[] nomesDosAtributos) {
 
 		atributosDeInstancia = new HashMap<String, Object>();
 

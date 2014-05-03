@@ -1,24 +1,15 @@
 package relacao;
 
-
 public class Classe {
 
 	private String nome;
-	private double distribuicao;
-	private long ocorrencias;
 
 	public Classe() {
 
 	}
 
-	public Classe(String nome, long ocorrencias, double distribuicao) {
+	public Classe(String nome) {
 		this.nome = nome;
-		this.ocorrencias = ocorrencias;
-		this.distribuicao = distribuicao;
-	}
-
-	public Classe(String nomeDaClasse) {
-		this(nomeDaClasse, 0, 0.0);
 	}
 
 	public String getNome() {
@@ -29,24 +20,18 @@ public class Classe {
 		this.nome = nome;
 	}
 
-	public long getNumOcorrencias() {
-		return ocorrencias;
-	}
+	@Override
+	public boolean equals(Object obj) {
 
-	public double getDistribuicao() {
-		return distribuicao;
-	}
+		Classe c = (Classe) obj;
 
-	public void setDistribuicao(double distribuicao) {
-		this.distribuicao = distribuicao;
-	}
+		if (this.nome.equalsIgnoreCase(c.getNome())) {
 
-	/**
-	 * Adiciona mais uma ocorrência a classe.
-	 */
-	public void addOcorrencia() {
+			return true;
 
-		ocorrencias++;
+		}
+
+		return false;
 
 	}
 

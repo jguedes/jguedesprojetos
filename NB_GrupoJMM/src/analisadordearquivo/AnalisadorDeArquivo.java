@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.Reader;
 
 import montadorderelacao.IMontadorDeRelacao;
-import relacao.Relacao;
 
 public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 
@@ -102,11 +101,6 @@ public class AnalisadorDeArquivo implements IAnalisadorDeArquivo {
 				}
 
 			}
-
-			// Ao fim da analise do arquivo deve-se atualizar os valores de
-			// distribuição das classes na relação.
-
-			montadorDeRelacao.getRelacao().calcularDistribuicaoDasClasses();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
