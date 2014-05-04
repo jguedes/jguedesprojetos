@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: Snow;
+}
+
+.superior {
+	border-style: none;
+	height: 100px;
+	width: 100%;
+	background-color: transparent;
+}
+
+.superior hr {
+	color: black;
+	border-width: 0;
+	height: 2px;
+	width: 100%;
+	background-color: black;
+	float: left;
+}
+
+.slogan {
+	border-style: none;
+	height: 90%;
+	width: 50%;
+	background-color: transparent;
+	float: left;
+}
+
+.slogan h1 {
+	margin-top: 0px;
+	background-color: transparent;
+}
+
+.user {
+	float: right;
+}
+
+.central {
+	border-style: none;
+	min-height: 500px;
+	width: 100%;
+	background-color: transparent;
+}
+
+/***********************************/
+/***** estilos para index.jsp ******/
+/***********************************/
+.index_table ul {
+	display: inline;
+	padding: 0;
+	background-color: transparent;
+}
+
+.index_table ul li {
+	display: inline;
+	list-style-type: none;
+}
+
+/***********************************/
+/** estilos para recovery.jsp **/
+/***********************************/
+.recovery_table {
+	width: 500px;
+	float: left;
+	margin-left: 70px;
+	margin-top: 40px;
+	font-size: 25px;
+}
+
+.recovery_table .txtEmail {
+	width: 50%;
+}
+
+.recovery_table .esqecSenha {
+	vertical-align: top;
+	font-size: 30px;
+	height: 80px;
+	background-color: transparent;
+}
+
+.recovery_table .btnLembrar {
+	width: 180px;
+	float: right;
+}
+
+/***********************************/
+/** estilos para criarUsuario.jsp **/
+/***********************************/
+.criarUsuario_table {
+	width: 500px;
+	float: left;
+	margin-left: 70px;
+	margin-top: 40px;
+	font-size: 25px;
+}
+
+.criarUsuario_table .txtEmail,.txtSenha,.txtRepetirSenha {
+	width: 50%;
+}
+
+.criarUsuario_table .btnCriarUsuario {
+	height: 80px;
+	background-color: transparent;
+}
+
+.criarUsuario_table .btnCriarUsuario input {
+	float: right;
+	width: 140px;
+}
+
+.criarUsuario_table .criarUsuario_linha {
+	width: 300px;
+	background-color: transparent;
+}
+
+.criarUsuario_table .criarUsuario_linha hr {
+	color: black;
+	border-width: 0;
+	height: 2px;
+	width: 100%;
+	background-color: black;
+}
+
+.criarUsuario_table .btnLembrar input {
+	width: 60px;
+}
+
+/***********************************/
+/*** estilos para o reda pé.jsp ****/
+/***********************************/
+.inferior {
+	text-align: center;
+	border-style: none;
+	width: 100%;
+	background-color: transparent;
+}
+
+.inferior a:VISITED,a:HOVER,a:ACTIVE {
+	color: blue;
+}
