@@ -21,8 +21,7 @@ public class Principal {
 
 		IMontadorDeRelacao montador = new MontadorDeRelacao();
 
-		IAnalisadorDeArquivo analisador = new AnalisadorDeArquivo(new File(
-				"iris.arff"), montador);
+		new AnalisadorDeArquivo(new File("iris.arff"), montador);
 
 		Relacao relacao = montador.getRelacao();
 

@@ -43,6 +43,16 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 
 	}
 
+	private void carregarDadosDeClasse() {
+
+		inserirAsClassesNoConjutoDadosDeClasse();
+
+		carregarOcorrenciasDasClasses();
+
+		carregarDistribuicoesDasClasses();
+
+	}
+
 	/**
 	 * Insere as classes da relação no conjunto dadosDeClasse.
 	 */
@@ -56,52 +66,6 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 		for (Classe classe : relacao.getClasses()) {
 
 			dadosDeClasse.put(classe, new DadosDeClasse());
-
-		}
-
-	}
-
-	private void carregarDadosDeClasse() {
-
-		inserirAsClassesNoConjutoDadosDeClasse();
-
-		carregarOcorrenciasDasClasses();
-
-		carregarDistribuicoesDasClasses();
-
-	}
-
-	/**
-	 * Define a distribuição de cada classe da relação calculando a
-	 * probabilidade a priori de cada classe.
-	 */
-	private void carregarDistribuicoesDasClasses() {
-
-		// A probabilidade a priori é a divisao dos casos favoráveis pelo total
-		// de casos.
-
-		long casosFavoraveis;
-
-		// A quantidade de instâncias na relação é o número total de casos.
-
-		long totalDeCasos = relacao.getInstancias().size();
-
-		// Calcular a distribuição de cada item do conjutno de dados de classe
-
-		for (Classe classe : dadosDeClasse.keySet()) {
-
-			// As ocorrências das classes é número de casos favoráveis.
-
-			casosFavoraveis = dadosDeClasse.get(classe).getOcorrencias();
-
-			// Calcular a probabilidade a priori
-
-			double probabilidade = Calculo.probabilidade(casosFavoraveis,
-					totalDeCasos);
-
-			// Atualizar a distribuição do item do conjunto de dados.
-
-			dadosDeClasse.get(classe).setDistribuicao(probabilidade);
 
 		}
 
@@ -151,6 +115,49 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 				}
 
 			}
+
+		}
+
+	}
+
+	private void testatConjunto() {
+		for (Classe classe : dadosDeClasse.keySet()) {
+			System.out.println("dados da classe: " + classe.getNome() + " = "
+					+ (dadosDeClasse.get(classe).getDistribuicao()));
+		}
+	}
+
+	/**
+	 * Define a distribuição de cada classe da relação calculando a
+	 * probabilidade a priori de cada classe.
+	 */
+	private void carregarDistribuicoesDasClasses() {
+
+		// A probabilidade a priori é a divisao dos casos favoráveis pelo total
+		// de casos.
+
+		long casosFavoraveis;
+
+		// A quantidade de instâncias na relação é o número total de casos.
+
+		long totalDeCasos = relacao.getInstancias().size();
+
+		// Calcular a distribuição de cada item do conjutno de dados de classe
+
+		for (Classe classe : dadosDeClasse.keySet()) {
+
+			// As ocorrências das classes é número de casos favoráveis.
+
+			casosFavoraveis = dadosDeClasse.get(classe).getOcorrencias();
+
+			// Calcular a probabilidade a priori
+
+			double probabilidade = Calculo.probabilidade(casosFavoraveis,
+					totalDeCasos);
+
+			// Atualizar a distribuição do item do conjunto de dados.
+
+			dadosDeClasse.get(classe).setDistribuicao(probabilidade);
 
 		}
 
@@ -294,14 +301,24 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 	@Override
 	public double getProb_APrioriDeClasse(Classe classe) {
 
-		return getProb_APrioriDeClasse(classe.getNome());
+		return dadosDeClasse.get(classe).getDistribuicao();
 
 	}
 
 	@Override
 	public double getProb_APrioriDeClasse(String nomeDaClasse) {
 
-		return dadosDeClasse.get(nomeDaClasse).getDistribuicao();
+		for (Classe classe : relacao.getClasses()) {
+
+			if (classe.getNome().equalsIgnoreCase(nomeDaClasse)) {
+
+				return getProb_APrioriDeClasse(classe);
+
+			}
+
+		}
+
+		return 0.0;
 
 	}
 
