@@ -281,13 +281,7 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 			prob.setValorProbabilidadeCondicional(valorProbCond);
 
 			System.out.println(prob.toString(ocorrClasse));
-			//
-			// System.out.println("Probabilidade condicional de " +
-			// ocorrValAtrib
-			// + "/" + ocorrClasse + "(" + prob.getNomeDeAtributo() + "("
-			// + prob.getValorDeAtributo() + ")" + "/" + classe.getNome()
-			// + "): " + prob.getValorProbabilidadeCondicional());
-
+			
 		}
 
 	}
@@ -320,7 +314,7 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 	private boolean probCondExiste(ProbabilidadeCondicional probCond) {
 
 		for (ProbabilidadeCondicional prob : probabilidadesCondicionais) {
-
+			
 			if (prob.equals(probCond)) {
 
 				prob.addOcorrencia();
@@ -370,20 +364,25 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 	public double getProb_Condicional(String nomeDeAtributo,
 			Object valorDeAtributo, String nomeDaClasse) {
 
+		double valor = 0.0;
+
+		ProbabilidadeCondicional p = new ProbabilidadeCondicional();
+
+		p.setNomeDeAtributo(nomeDeAtributo);
+		p.setValorDeAtributo(valorDeAtributo);
+		p.setClasse(new Classe(nomeDaClasse));
+
 		for (ProbabilidadeCondicional prob : probabilidadesCondicionais) {
+			
+			if (prob.equals(p)) {
 
-			if (prob.getNomeDeAtributo().equalsIgnoreCase(nomeDeAtributo)
-					&& prob.getValorDeAtributo().equals(valorDeAtributo)
-					&& prob.getClasse().getNome()
-							.equalsIgnoreCase(nomeDaClasse)) {
-
-				return prob.getValorProbabilidadeCondicional();
+				valor = prob.getValorProbabilidadeCondicional();
 
 			}
 
 		}
 
-		return 0;
+		return valor;
 
 	}
 
