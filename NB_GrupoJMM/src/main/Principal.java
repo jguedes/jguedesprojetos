@@ -4,10 +4,9 @@ import java.io.File;
 
 import montadorderelacao.IMontadorDeRelacao;
 import montadorderelacao.MontadorDeRelacao;
-import analisadordearquivo.AnalisadorDeArquivo;
-import analisadordearquivo.IAnalisadorDeArquivo;
-import analisenaivebayes.AnaliseNaiveBayes;
 import relacao.Relacao;
+import analisadordearquivo.AnalisadorDeArquivo;
+import analisenaivebayes.AnaliseNaiveBayes;
 
 public class Principal {
 
@@ -29,7 +28,9 @@ public class Principal {
 
 		System.out.println(analiseNB.getProb_APrioriDeClasse(relacao
 				.getClasses().get(0)));
+
 		System.out.println(analiseNB.getProb_Condicional(relacao.getAtributos()
-				.get(0).getNome(), 5.1, "Iris-setosa"));
+				.get(0).getNome(), 5.9, "Iris-virginica"));
+
 	}
 }

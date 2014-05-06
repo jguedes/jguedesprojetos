@@ -60,7 +60,8 @@ public class ProbabilidadeCondicional {
 
 		if (this.classe.equals(p.getClasse())
 				&& this.nomeDeAtributo.equalsIgnoreCase(p.getNomeDeAtributo())
-				&& this.valorDeAtributo.equals(p.getValorDeAtributo())) {
+				&& this.valorDeAtributo.toString().equals(
+						p.getValorDeAtributo().toString())) {
 
 			return true;
 
