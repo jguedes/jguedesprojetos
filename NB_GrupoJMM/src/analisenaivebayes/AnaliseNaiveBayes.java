@@ -120,13 +120,6 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 
 	}
 
-	private void testatConjunto() {
-		for (Classe classe : dadosDeClasse.keySet()) {
-			System.out.println("dados da classe: " + classe.getNome() + " = "
-					+ (dadosDeClasse.get(classe).getDistribuicao()));
-		}
-	}
-
 	/**
 	 * Define a distribuição de cada classe da relação calculando a
 	 * probabilidade a priori de cada classe.
@@ -172,27 +165,6 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 		criarProbabilidadesCondicionais();
 
 		calcularProbCondicionais();
-
-	}
-
-	private void calcularProbCondicionais() {
-
-		double valorProbCond;
-
-		Classe classe;
-
-		// Percorrer a lista de probabilidades condicionais
-
-		for (ProbabilidadeCondicional prob : probabilidadesCondicionais) {
-
-			classe = prob.getClasse();
-
-			valorProbCond = Calculo.probabilidade(prob.getOcorrencia(),
-					dadosDeClasse.get(classe).getOcorrencias());
-
-			prob.setValorProbabilidadeCondicional(valorProbCond);
-
-		}
 
 	}
 
@@ -250,15 +222,71 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 
 					// se não encotrar insere na lista
 
+					// Atualizar ocorrência
+
+					probCond.addOcorrencia();
+
 					probabilidadesCondicionais.add(probCond);
 
 				}
 
-				// Atualizar ocorrência
-
-				probCond.addOcorrencia();
-
 			}
+
+		}
+
+	}
+
+	/**
+	 * Calcula a probabilidade condicional de todos os valores de todos os
+	 * atributos para todas as classes.
+	 */
+	private void calcularProbCondicionais() {
+
+		// Probabilidade condicional é divisão da soma das ocorrências do valor
+		// de um atributo para uma determinada classe C pela quantidade de
+		// ocorrências da classe C no conjunto de instâncias da relação.
+
+		// Recebe a classe a qual o valor do atributo faz referência.
+		Classe classe;
+
+		// Recebe a quantidade de ocorrências do valor do atributo para a
+		// classe.
+		long ocorrValAtrib;
+
+		// Recebe a quantidade de ocorrências da classe no conjunto de
+		// instâncias da relação.
+		long ocorrClasse;
+
+		// Recebe o resultado da divisão.
+		double valorProbCond;
+
+		// Percorrer a lista de probabilidades condicionais
+
+		for (ProbabilidadeCondicional prob : probabilidadesCondicionais) {
+
+			// pegar a classe
+			classe = prob.getClasse();
+
+			// pegar a quantidade de ocorrências do valor do atributo.
+			ocorrValAtrib = prob.getOcorrencia();
+
+			// pegar a quantidade de ocorrências da classe.
+			ocorrClasse = dadosDeClasse.get(classe).getOcorrencias();
+
+			// calcular a probabilidade condicional
+			valorProbCond = Calculo.probabilidade(ocorrValAtrib, ocorrClasse);
+
+			// Armazenar no item do conjunto de probabildades condicionais o
+			// valor.
+			prob.setValorProbabilidadeCondicional(valorProbCond);
+
+			System.out.println(prob.toString(ocorrClasse));
+			//
+			// System.out.println("Probabilidade condicional de " +
+			// ocorrValAtrib
+			// + "/" + ocorrClasse + "(" + prob.getNomeDeAtributo() + "("
+			// + prob.getValorDeAtributo() + ")" + "/" + classe.getNome()
+			// + "): " + prob.getValorProbabilidadeCondicional());
 
 		}
 
@@ -274,12 +302,19 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 
 	private ProbabilidadeCondicional criarProbabilidadeCondicional(
 			String nomeDoAtributo, Classe classe, Object valorDoAtributo) {
+
 		ProbabilidadeCondicional probCond;
+
 		probCond = new ProbabilidadeCondicional();
+
 		probCond.setClasse(classe);
+
 		probCond.setNomeDeAtributo(nomeDoAtributo);
+
 		probCond.setValorDeAtributo(valorDoAtributo);
+
 		return probCond;
+
 	}
 
 	private boolean probCondExiste(ProbabilidadeCondicional probCond) {
@@ -287,6 +322,8 @@ public class AnaliseNaiveBayes implements IAnaliseNaiveBayes {
 		for (ProbabilidadeCondicional prob : probabilidadesCondicionais) {
 
 			if (prob.equals(probCond)) {
+
+				prob.addOcorrencia();
 
 				return true;
 

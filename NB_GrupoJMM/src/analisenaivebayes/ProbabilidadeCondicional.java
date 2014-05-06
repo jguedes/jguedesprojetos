@@ -69,4 +69,24 @@ public class ProbabilidadeCondicional {
 		return false;
 	}
 
+	public String toString(long ocorrenciasDeClasse) {
+
+		StringBuilder s = new StringBuilder();
+
+		s.append("Probabilidade condicional de [");
+		s.append(nomeDeAtributo);
+		s.append("(");
+		s.append(valorDeAtributo);
+		s.append(")/");
+		s.append(classe.getNome());
+		s.append("]: ");
+		s.append(ocorrencia);
+		s.append("/");
+		s.append(ocorrenciasDeClasse);
+		s.append(" = ");
+		s.append(valorProbabilidadeCondicional);
+
+		return s.toString();
+	}
+
 }
