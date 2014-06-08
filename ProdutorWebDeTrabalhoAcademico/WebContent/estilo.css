@@ -5,12 +5,14 @@ body {
 }
 
 .superior {
-	border-style: none;
-	height: 100px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
 	width: 100%;
 	background-color: transparent;
+	height: 100px;
 }
 
+/*
 .superior hr {
 	color: black;
 	border-width: 0;
@@ -19,7 +21,7 @@ body {
 	background-color: black;
 	float: left;
 }
-
+*/
 .slogan {
 	border-style: none;
 	height: 90%;
@@ -37,11 +39,45 @@ body {
 	float: right;
 }
 
+.menu {
+	width: 100%;
+	float: left;
+}
+
+.menu table {
+	margin-left: 50px;
+}
+
 .central {
-	border-style: none;
+	border-top-style: solid;
+	border-top-width: 1px;
 	min-height: 500px;
 	width: 100%;
 	background-color: transparent;
+	float: left;
+}
+
+.centralSuperior {
+	margin-left: 30px;
+	width: 1250px;
+	float: left;
+}
+
+.divCentralTitulo {
+	font-size: 20pt;
+	width: 350px;
+	float: left;
+}
+
+.inferior {
+	text-align: center;
+	border-style: none;
+	width: 100%;
+	background-color: transparent;
+}
+
+.inferior a:VISITED,a:HOVER,a:ACTIVE {
+	color: blue;
 }
 
 /***********************************/
@@ -58,9 +94,9 @@ body {
 	list-style-type: none;
 }
 
-/***********************************/
-/** estilos para recovery.jsp **/
-/***********************************/
+/************************************/
+/** estilos para page_recovery.jsp **/
+/************************************/
 .recovery_table {
 	width: 500px;
 	float: left;
@@ -73,7 +109,7 @@ body {
 	width: 50%;
 }
 
-.recovery_table .esqecSenha {
+.recovery_table .esquecSenha {
 	vertical-align: top;
 	font-size: 30px;
 	height: 80px;
@@ -85,9 +121,9 @@ body {
 	float: right;
 }
 
-/***********************************/
-/** estilos para criarUsuario.jsp **/
-/***********************************/
+/****************************************/
+/** estilos para page_criarUsuario.jsp **/
+/****************************************/
 .criarUsuario_table {
 	width: 500px;
 	float: left;
@@ -127,16 +163,190 @@ body {
 	width: 60px;
 }
 
-/***********************************/
-/*** estilos para o reda pé.jsp ****/
-/***********************************/
-.inferior {
-	text-align: center;
-	border-style: none;
-	width: 100%;
-	background-color: transparent;
+/*************************************************/
+/*** estilos para page_usuarioAutenticado.jsp ****/
+/*************************************************/
+.superior .user .nome {
+	
 }
 
-.inferior a:VISITED,a:HOVER,a:ACTIVE {
-	color: blue;
+/**************************************************/
+/*** estilos para page_usuarioCompartilhar.jsp ****/
+/**************************************************/
+.centralGrid {
+	clear: both;
 }
+
+.centralGrid table {
+	margin-left: 30px;
+	width: 1250px;
+	max-width: 1250px;
+	border-color: black;
+	border: thick;
+}
+
+.btnCompartilhar table .tr_nameColmns {
+	background-color: Gainsboro;
+}
+
+.btnCompartilhar table .tr_impar {
+	background-color: LightSteelBlue;
+}
+
+.btnCompartilhar table .tr_par {
+	background-color: WhiteSmoke;
+}
+
+.btnCompartilhar table .td_selecao {
+	width: 30px;
+	text-align: center;
+}
+
+.btnCompartilhar table .td_nome {
+	width: 900px;
+}
+
+.btnCompartilhar table .td_data {
+	width: 160px;
+	text-align: center;
+}
+
+.btnCompartilhar table .td_compartilhado {
+	width: 160px;
+	text-align: center;
+}
+
+.divCentralBtns {
+	width: 900px;
+	float: right;
+}
+
+.divCentralBtns input {
+	font-size: 12pt;
+}
+
+.central .centralSuperior .divCentralTitDoc {
+	float: left;
+}
+
+.btnCompartilhar {
+	float: left;
+	padding-top: 3px;
+	width: 100%;
+}
+
+.btnCompartilhar .btnCompart {
+	margin-top: 3px;
+}
+
+.btnCompartilhar .listaDocs {
+	float: left;
+}
+
+.tblBtns {
+	float: right;
+}
+
+/****************************************************/
+/*** estilos para o page_visualizarDocumento.jsp ****/
+/****************************************************/
+.visual {
+	float: left;
+	background-color: white;
+	width: 230mm;
+	min-width: 230mm;
+	max-width: 230mm;
+	margin-left: 50mm;
+}
+
+.visual .capa {
+	border-style: solid;
+	border-width: 1px;
+	max-width: 210mm;
+	max-height: 297mm;
+	min-width: 210mm;
+	min-height: 297mm;
+	margin-left: 10mm;
+	font-family: serif;
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	width: 210mm;
+	height: 297mm;
+}
+
+.visual .capa .instituicao {
+	margin-top: 30mm;
+}
+
+.visual .capa .titulo {
+	margin-top: 30%;
+}
+
+.visual .capa .autor {;
+	margin-top: 25%;
+}
+
+.visual .capa .localdata {
+	margin-top: 50%;
+}
+/************************************************/
+/*** estilos para o page_editarDocumento.jsp ****/
+/************************************************/
+.centralIntermediaria {
+	float: left;
+	/* 	border-style: solid; */
+	width: 100%;
+}
+
+.centralIntermediaria .centralIntermediaria_left {
+	float: left;
+	width: 20%;
+	/* 	border-style: solid; */
+}
+
+.centralIntermediaria .centralIntermediaria_right {
+	float: left;
+	/* 	border-style: solid; */
+}
+
+.centralIntermediaria .centralIntermediaria_right textarea {
+	min-width: 150mm;
+	min-height: 50mm;
+	max-width: 150mm;
+	max-height: 50mm;
+}
+
+.centralIntermediaria .centralIntermediaria_left ul {
+	list-style: none;
+}
+
+.centralIntermediaria .centralIntermediaria_left a {
+	display: block;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-left-style: solid;
+	border-left-width: 2px;
+}
+
+.centralInferior {
+	float: left;
+	/* 	border-style: solid; */
+}
+
+/*************************************************/
+/*** estilos para o page_excluirDocumento.jsp ****/
+/*************************************************/
+
+
+/***********************************************/
+/*** estilos para o page_criarDocumento.jsp ****/
+/***********************************************/
+
+
+/*********************************************/
+/*** estilos para o page_alterarSenha.jsp ****/
+/*********************************************/
+

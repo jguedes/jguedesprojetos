@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 <link rel="shortcut icon" href="./imagens/icon.jpg">
 <link rel="stylesheet" type="text/css" href="./estilo.css">
-<title>PTAOL - Produtor de Trabalhos Acadêmicos On Line</title>
+<title>PTAOL - Esqueceu a Senha?</title>
 </head>
 <body>
 	<%
@@ -21,9 +19,33 @@
 			<h4>Produtor de Trabalhos Acadêmicos On Line</h4>
 		</div>
 		<div class="user"></div>
-		<hr>
 	</div>
-	<div class="central"></div>
+	<div class="menu">
+		<table>
+			<tr>
+				<td><a href="index.jsp">Principal</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="central">
+		<form action="recovery.jsp">
+			<table class="recovery_table">
+				<tr class="esquecSenha">
+					<td>Esqueceu a senha?</td>
+				</tr>
+				<tr>
+					<td>Digite seu E-mail</td>
+				</tr>
+				<tr>
+					<td><input class="txtEmail" name="txtEmail" type="text"></td>
+				</tr>
+				<tr>
+					<td class="btnLembrar"><input type="submit" value="Lembrar"></td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
 	<div class="inferior">
 		<a class="makeby" href="https://code.google.com/p/jguedesprojetos">Produzido
 			por JGuedesProjetos</a>
